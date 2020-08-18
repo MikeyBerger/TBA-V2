@@ -7,6 +7,7 @@ public class PlayerController : MonoBehaviour
 {
     private Vector2 MoveVector;
     private Rigidbody2D RB;
+    private Animator Anim;
     public bool IsDashing = false;
     public bool FacingRight = true;
     public float Speed;
@@ -15,7 +16,8 @@ public class PlayerController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        RB = GetComponent<Rigidbody2D>();   
+        RB = GetComponent<Rigidbody2D>();
+        Anim = GetComponent<Animator>();
     }
 
     // Update is called once per frame
@@ -62,6 +64,16 @@ public class PlayerController : MonoBehaviour
         }
         transform.localScale = Scale;
         #endregion
+
+
+        if (MoveVector.x > 0 || MoveVector.y > 0 || MoveVector.x < 0 || MoveVector.y < 0)
+        {
+            Anim.SetBool("IsFlying", true);
+        }
+        else
+        {
+            Anim.SetBool("IsFlying", false);
+        }
     }
 
 
